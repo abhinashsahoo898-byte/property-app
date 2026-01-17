@@ -21,7 +21,7 @@ const AdminPanel = () => {
   const fetchLeads = async () => {
     setLoading(true);
     try {
-      const res = await axios.get('http://localhost:5000/api/leads');
+      const res = await axios.get('https://property-backend.onrender.com/api/leads');
       setLeads(res.data);
     } catch (err) {
       alert("Failed to fetch data. Is the backend running?");
