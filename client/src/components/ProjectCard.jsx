@@ -11,7 +11,7 @@ const ProjectCard = ({ project, user, index }) => {
   const totalPrice = size * project.price;
 
   const handleWhatsApp = () => {
-    window.open(`https://wa.me/919999999999?text=I am interested in ${project.name}`, '_blank');
+    window.open(`https://wa.me/917008664361?text=I am interested in ${project.name}`, '_blank');
   };
 
   return (
