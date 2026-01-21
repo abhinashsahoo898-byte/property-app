@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 
-import ChatBot from './components/ChatBot';
 import EntryModal from './components/EntryModal';
 import Navbar from './components/Navbar';
 import Home from './components/Home';
-import Dashboard from './components/Dashboard'; 
+import Dashboard from './components/Dashboard';
+import ChatBot from './components/ChatBot'; 
 // AdminPanel import removed
 
 const About = () => <div className="min-h-screen bg-midnight pt-32 text-center text-white text-2xl font-serif">About Us Page Content</div>;
