@@ -12,7 +12,7 @@ const EntryModal = ({ onComplete }) => {
     setLoading(true);
     // Simulate API for smooth UX
     try {
-      await axios.post('http://localhost:5000/api/leads', { ...formData, project: 'Entry' });
+      await axios.post('https://property-app-bm8a.onrender.com', { ...formData, project: 'Entry' });
     } catch(e) { console.log(e); }
     
     setTimeout(() => { onComplete(formData); setLoading(false); }, 1000);
