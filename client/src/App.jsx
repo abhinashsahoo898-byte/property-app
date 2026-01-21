@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 
+import ChatBot from './components/ChatBot';
 import EntryModal from './components/EntryModal';
 import Navbar from './components/Navbar';
 import Home from './components/Home';
@@ -37,6 +38,7 @@ function App() {
                       {/* Admin Route Removed */}
                       <Route path="*" element={<Navigate to="/" />} />
                     </Routes>
+                    <ChatBot />
                 </div>
               </Router>
             )}
