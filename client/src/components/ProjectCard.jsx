@@ -1,146 +1,70 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Calculator, MessageCircle, MapPin } from 'lucide-react';
+import { Calculator, ArrowUpRight } from 'lucide-react';
 
 const formatCurrency = (amount) => {
-  return new Intl.NumberFormat('en-IN', {
-    style: 'currency',
-    currency: 'INR',
-    maximumFractionDigits: 0
-  }).format(amount);
+  return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(amount);
 };
 
 const ProjectCard = ({ project, user, index }) => {
   const [size, setSize] = useState(900);
-  const [isCustom, setIsCustom] = useState(false);
-
   const totalPrice = size * project.price;
 
   const handleWhatsApp = () => {
-    const text = `*New Lead Inquiry*%0a` +
-                 `--------------------%0a` +
-                 `👤 Name: ${user.name}%0a` +
-                 `📱 Phone: ${user.phone}%0a` +
-                 `🏡 Project: ${project.name}%0a` +
-                 `📍 Location: ${project.location}%0a` +
-                 `📏 Size: ${size} sq.ft%0a` +
-                 `💰 Estimated Price: ${formatCurrency(totalPrice)}%0a` +
-                 `--------------------%0a` +
-                 `Please contact me for a site visit.`;
-
-    window.open(`https://wa.me/919999999999?text=${text}`, '_blank');
+    window.open(`https://wa.me/919999999999?text=I am interested in ${project.name}`, '_blank');
   };
 
   return (
     <motion.div 
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.1 }}
-      className="relative bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border border-slate-200 dark:border-slate-700 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 group flex flex-col"
+      className="group relative bg-surface border border-white/5 hover:border-primary/50 transition-colors duration-500"
     >
-      {/* 1. Verified Badge */}
-      <div className="absolute top-4 left-4 z-10 bg-white/90 dark:bg-black/80 backdrop-blur px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider text-teal-700 dark:text-teal-400 shadow-sm border border-white/20">
-        Verified
-      </div>
-
-      {/* 2. Image Section */}
-      <div className="h-56 overflow-hidden relative">
-        <img 
-          src={project.image} 
-          alt={project.name} 
-          className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
-        />
-        {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/20 to-transparent"></div>
-        
-        {/* Text Overlay */}
-        <div className="absolute bottom-4 left-4 text-white">
-          <h3 className="text-xl font-serif font-bold tracking-wide">{project.name}</h3>
-          <p className="text-slate-300 text-sm flex items-center gap-1 opacity-90 mt-1">
-            <MapPin size={14} className="text-teal-400" /> 
-            {project.location}
-          </p>
+      {/* Image */}
+      <div className="aspect-[4/3] overflow-hidden relative grayscale group-hover:grayscale-0 transition-all duration-700">
+        <img src={project.image} alt={project.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000" />
+        <div className="absolute inset-0 bg-gradient-to-t from-midnight via-transparent to-transparent opacity-90"></div>
+        <div className="absolute bottom-6 left-6">
+            <h3 className="text-2xl font-serif text-white">{project.name}</h3>
+            <p className="text-primary text-xs uppercase tracking-widest mt-1">{project.location}</p>
         </div>
       </div>
 
-      {/* 3. Content & Calculator Section */}
-      <div className="p-6 flex-1 flex flex-col">
-        {/* Price Rate */}
-        <div className="flex justify-between items-center mb-5 pb-4 border-b border-slate-200 dark:border-slate-700">
-          <span className="text-slate-500 dark:text-slate-400 text-sm font-medium">Current Rate</span>
-          <span className="text-primary dark:text-teal-400 font-bold text-lg">₹{project.price}/sq.ft</span>
+      {/* Content */}
+      <div className="p-8">
+        <div className="flex justify-between items-end mb-8 border-b border-white/5 pb-6">
+            <div>
+                <p className="text-muted text-xs uppercase tracking-widest mb-1">Base Price</p>
+                <p className="text-white text-xl font-serif">₹{project.price}<span className="text-sm text-muted font-sans"> / sq.ft</span></p>
+            </div>
         </div>
 
-        {/* Customizer Tool */}
-        <div className="bg-slate-50 dark:bg-slate-900/50 p-4 rounded-xl mb-6 border border-slate-100 dark:border-slate-700">
-          <div className="flex items-center gap-2 mb-3 text-slate-700 dark:text-slate-300">
-            <Calculator size={16} />
-            <span className="font-medium text-sm">Estimate Cost</span>
-          </div>
-
-          {/* Size Buttons */}
-          <div className="flex gap-2 mb-3 flex-wrap">
-            {[600, 900, 1200].map(s => (
-              <button
-                key={s}
-                onClick={() => { setSize(s); setIsCustom(false); }}
-                className={`px-3 py-1 text-xs rounded-full border transition-colors ${
-                  size === s && !isCustom 
-                    ? 'bg-primary dark:bg-teal-600 text-white border-primary dark:border-teal-600' 
-                    : 'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-400 border-slate-300 dark:border-slate-600 hover:border-primary dark:hover:border-teal-500'
-                }`}
-              >
-                {s}
-              </button>
-            ))}
-            <button
-               onClick={() => setIsCustom(true)}
-               className={`px-3 py-1 text-xs rounded-full border transition-colors ${
-                 isCustom 
-                   ? 'bg-primary dark:bg-teal-600 text-white border-primary dark:border-teal-600' 
-                   : 'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-400 border-slate-300 dark:border-slate-600'
-               }`}
-            >
-              Custom
-            </button>
-          </div>
-
-          {/* Custom Input */}
-          {isCustom && (
-            <input 
-              type="number" 
-              value={size}
-              onChange={(e) => setSize(Number(e.target.value))}
-              className="w-full px-3 py-2 text-sm border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-800 dark:text-white rounded focus:ring-1 focus:ring-primary outline-none mb-2 transition-colors"
-              placeholder="Enter sq.ft"
-            />
-          )}
-
-          {/* Total Price Display */}
-          <div className="mt-4 pt-4 border-t border-slate-200 dark:border-slate-700 flex justify-between items-end">
-            <span className="text-xs text-slate-500 dark:text-slate-400 uppercase font-bold tracking-wider">Total</span>
-            <motion.span 
-              key={totalPrice}
-              initial={{ scale: 0.8 }}
-              animate={{ scale: 1 }}
-              className="text-xl font-bold text-slate-900 dark:text-white"
-            >
-              {formatCurrency(totalPrice)}
-            </motion.span>
-          </div>
+        {/* Minimalist Calculator */}
+        <div className="bg-white/5 p-6 mb-8">
+            <div className="flex items-center gap-2 mb-4 text-primary">
+                <Calculator size={14} />
+                <span className="text-xs uppercase tracking-widest">Investment Calculator</span>
+            </div>
+            <div className="flex justify-between text-sm text-muted mb-4">
+                {[600, 900, 1200].map(s => (
+                    <button key={s} onClick={() => setSize(s)} className={`pb-1 border-b ${size === s ? 'text-white border-primary' : 'border-transparent hover:text-white'}`}>
+                        {s} sq.ft
+                    </button>
+                ))}
+            </div>
+            <div className="flex justify-between items-center">
+                <span className="text-muted text-sm">Est. Total</span>
+                <span className="text-gold text-xl font-serif">{formatCurrency(totalPrice)}</span>
+            </div>
         </div>
 
-        {/* WhatsApp Button */}
-        <button 
-          onClick={handleWhatsApp}
-          className="mt-auto w-full bg-[#25D366] hover:bg-[#128C7E] text-white font-semibold py-3.5 rounded-xl flex items-center justify-center gap-2 transition-all shadow-md hover:shadow-lg active:scale-95"
-        >
-          <MessageCircle size={20} />
-          Get Quote on WhatsApp
+        <button onClick={handleWhatsApp} className="w-full flex items-center justify-between text-white border border-white/10 hover:bg-white hover:text-midnight px-6 py-4 transition-all duration-300 group-hover:border-white">
+            <span className="uppercase tracking-widest text-xs font-bold">Inquire Now</span>
+            <ArrowUpRight size={18} />
         </button>
       </div>
     </motion.div>
   );
 };
-
 export default ProjectCard;

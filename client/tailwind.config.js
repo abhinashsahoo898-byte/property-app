@@ -2,29 +2,26 @@
 export default {
   content: [
     "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
+    "./src/**/*.{js,ts,jsx,tsx}", /* <--- This line is CRITICAL */
   ],
-  darkMode: 'class', // Enables the Dark/Light toggle
+  darkMode: 'class', 
   theme: {
     extend: {
       colors: {
-        primary: '#0f766e', // Teal 700
-        secondary: '#f8fafc', // Slate 50
-        darkBg: '#0f172a', // Slate 900
-        darkCard: '#1e293b', // Slate 800
+        primary: '#C5A059',
+        primaryHover: '#B08D45',
+        midnight: '#020617',
+        surface: '#0f172a',
+        light: '#f8fafc',
+        muted: '#94a3b8',
       },
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
-        serif: ['Playfair Display', 'serif'],
+        sans: ['sans-serif'],
+        serif: ['serif'],
       },
-      animation: {
-        'float': 'float 6s ease-in-out infinite',
-      },
-      keyframes: {
-        float: {
-          '0%, 100%': { transform: 'translateY(0)' },
-          '50%': { transform: 'translateY(-20px)' },
-        }
+      backgroundImage: {
+        'luxury-gradient': 'linear-gradient(to right bottom, #020617, #0f172a)',
+        'gold-gradient': 'linear-gradient(to right, #C5A059, #E5C579, #C5A059)',
       }
     },
   },

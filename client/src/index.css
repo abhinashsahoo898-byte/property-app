@@ -2,40 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
-}
-
+/* Force a background color to test if CSS is loading */
 body {
-  margin: 0;
-  /* Important: Transparent background so the fixed decorative layer shows through */
-  background-color: transparent; 
-  /* Fallback color if something loads slow */
-  @apply bg-slate-50 dark:bg-slate-900;
-}
-
-/* Make scrolling smooth for the whole page */
-html {
-  scroll-behavior: smooth;
-}
-
-/* Custom Scrollbar Styling (Optional but looks premium) */
-::-webkit-scrollbar {
-  width: 8px;
-}
-::-webkit-scrollbar-track {
-  background: transparent; 
-}
-::-webkit-scrollbar-thumb {
-  background: #cbd5e1; 
-  border-radius: 4px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8; 
-}
-.dark ::-webkit-scrollbar-thumb {
-  background: #475569;
-}
-.dark ::-webkit-scrollbar-thumb:hover {
-  background: #64748b; 
+    background-color: #020617; /* Midnight Blue */
+    color: white;
+    margin: 0;
 }
